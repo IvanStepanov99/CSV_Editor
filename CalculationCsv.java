@@ -98,4 +98,39 @@ public class CalculationCsv {
         } catch (IOException e){ e.printStackTrace();}
         return totalDebt;
     }
+
+    public BigDecimal averageInterestRate(String path){
+        BigDecimal totalWeighted = BigDecimal.ZERO;
+
+        try(BufferedReader br = new BufferedReader(new FileReader(path))){
+            String line;
+
+            while((line = br.readLine())!=null){
+                String[] values = line.split(",");
+
+                if (values.length<5){
+                    System.err.println("Invalid CSV line, skipping: " + line);
+                    continue;
+                }
+
+                try{
+                    BigDecimal interestRate = new BigDecimal(values[3]);
+                    BigDecimal debtLoan = new BigDecimal(values[2]);
+
+                    totalWeighted =totalWeighted.add(debtLoan.multiply(interestRate));
+
+                } catch (NumberFormatException e){
+                    System.err.println("Invalid value in line: " + line);
+                }
+            }
+            if(sumOfDebt(path).compareTo(BigDecimal.ZERO)==0){
+                return BigDecimal.ZERO;
+            }
+            return totalWeighted.divide(sumOfDebt(path),2,BigDecimal.ROUND_HALF_UP);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+     return BigDecimal.ZERO;
+    }
+
 }

@@ -6,7 +6,7 @@ public class Main{
 
         reader.readCsv(filePath);
 
-        System.out.println(calculation.sumOfDebt(filePath));
+        System.out.println(calculation.averageInterestRate(filePath)+"%");
 
     }
 }
