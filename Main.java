@@ -6,7 +6,7 @@ public class Main{
 
         reader.readCsv(filePath);
 
-        System.out.println(calculation.netIncome(filePath));
+        System.out.println(calculation.sumOfDebt(filePath));
 
     }
 }
