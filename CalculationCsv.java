@@ -9,12 +9,12 @@ public class CalculationCsv {
         BigDecimal totalIncome = BigDecimal.ZERO;
         String line;
 
-        try (BufferedReader br =  new BufferedReader(new FileReader(path))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 
-            while ((line = br.readLine()) != null){
-                String [] values = line.split(",");
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
 
-                if(values.length<5){
+                if (values.length < 5) {
                     System.err.println("Invalid CSV line, skipping: " + line);
                     continue;
                 }
@@ -24,14 +24,43 @@ public class CalculationCsv {
 
                     totalIncome = totalIncome.add(income);
 
-                } catch (NumberFormatException e){
+                } catch (NumberFormatException e) {
                     System.err.println("Invalid income value in line: " + line);
                 }
             }
 
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return totalIncome;
+    }
+
+    public BigDecimal sumOfExpense(String path) {
+
+        BigDecimal totalExpense = BigDecimal.ZERO;
+        String line;
+
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+
+                if (values.length < 5) {
+                    System.err.println("Invalid CSV line, skipping: " + line);
+                    continue;
+                }
+
+                try {
+                    BigDecimal expense = new BigDecimal(values[1]);
+                    totalExpense = totalExpense.add(expense);
+
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid value in line: " + line);
+                }
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return totalExpense;
     }
 }
