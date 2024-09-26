@@ -63,4 +63,15 @@ public class CalculationCsv {
         }
         return totalExpense;
     }
+
+    public BigDecimal netIncome(String path){
+        BigDecimal netIncome = BigDecimal.ZERO;
+
+        netIncome = sumOfIncome(path).subtract(sumOfExpense(path));
+
+        if(netIncome.compareTo(BigDecimal.ZERO)< 0){
+            System.err.println("The Income is negative: " + netIncome);
+        }
+            return netIncome;
+    }
 }
