@@ -2,3 +2,4 @@
 6500,4200,15000,3.8,Car Loan
 4800,2900,25000,6.2,Student Loan
 7200,5000,12000,4.0,Credit Card Debt
+

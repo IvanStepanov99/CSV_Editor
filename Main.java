@@ -1,66 +1,71 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.io.IOException;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        String filePath = "CSV.txt";
+    public static void main(String[] args) throws IOException {
+        String filePath = "Data.csv";
         Scanner keyboard = new Scanner(System.in);
         boolean exit = false;
         CalculationCsv calculation = new CalculationCsv();
         CsvWriter writer = new CsvWriter();
 
         while (!exit) {
-            System.out.println("\nMenu:");
-            System.out.println("1. Total of Income");
-            System.out.println("2. Total of Expenses");
-            System.out.println("3. Net Income (Savings)");
-            System.out.println("4. Total of Debt/Loan");
-            System.out.println("5. Average Interest Rate");
-            System.out.println("6. Sort the CSV file");
-            System.out.println("7. Add data to the CSV file");
-            System.out.println("8. Quit");
-            System.out.print("Please select an option: ");
-            int option = keyboard.nextInt();
-            keyboard.nextLine();
+            try {
+                System.out.println("\nMenu:");
+                System.out.println("1. Total of Income");
+                System.out.println("2. Total of Expenses");
+                System.out.println("3. Net Income (Savings)");
+                System.out.println("4. Total of Debt/Loan");
+                System.out.println("5. Average Interest Rate");
+                System.out.println("6. Sort the CSV file");
+                System.out.println("7. Add data to the CSV file");
+                System.out.println("8. Quit");
+                System.out.print("Please select an option: ");
 
-            switch (option) {
-                case 1:
-                    System.out.println("Total Income: $" + calculation.sumOfIncome(filePath));
-                    break;
-                case 2:
-                    System.out.println("Total Expenses: $" + calculation.sumOfExpense(filePath));
-                    break;
-                case 3:
-                    System.out.println("Net Income: $" + calculation.netIncome(filePath));
-                    break;
-                case 4:
-                    System.out.println("Total of Debt/Loan: $" + calculation.sumOfDebt(filePath));
-                    break;
-                case 5:
-                    System.out.println("Average Interest Rate $" + calculation.averageInterestRate(filePath) + "%");
-                    break;
-                case 6:
-                    sortCvsMenu(filePath);
-                    break;
-                case 7:
-                    writer.writeToCsv(filePath);
-                    break;
-                case 8:
-                    exit = true;
-                    break;
-                default:
-                    System.out.println("Invalid option. Please try again!");
+                if(!keyboard.hasNextInt()){
+                    keyboard.nextLine();
+                }
+                    int option = keyboard.nextInt();
+                    keyboard.nextLine();
+
+                    switch (option) {
+                        case 1:
+                            System.out.println("Total Income: $" + calculation.sumOfIncome(filePath));
+                            break;
+                        case 2:
+                            System.out.println("Total Expenses: $" + calculation.sumOfExpense(filePath));
+                            break;
+                        case 3:
+                            System.out.println("Net Income: $" + calculation.netIncome(filePath));
+                            break;
+                        case 4:
+                            System.out.println("Total of Debt/Loan: $" + calculation.sumOfDebt(filePath));
+                            break;
+                        case 5:
+                            System.out.println("Average Interest Rate $" + calculation.averageInterestRate(filePath) + "%");
+                            break;
+                        case 6:
+                            sortCvsMenu(filePath, keyboard);
+                            break;
+                        case 7:
+                            writer.writeToCsv(filePath,keyboard);
+                            break;
+                        case 8:
+                            exit = true;
+                            break;
+                        default:
+                            System.out.println("Invalid option. Please try again!");
+                    }
+
+            }catch (IOException e){
+                keyboard.nextLine();
             }
         }
         keyboard.close();
     }
 
-    public static void sortCvsMenu(String path) {
-        Scanner scanner = new Scanner(System.in);
+    public static void sortCvsMenu(String path,Scanner scanner)  throws IOException{
         List<sortCsv> csvList = CsvReader.readCsv(path);
-
         boolean exit = false;
         while (!exit) {
             System.out.println("\nSorting Menu:");

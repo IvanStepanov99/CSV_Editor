@@ -5,9 +5,8 @@ import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class CsvWriter {
-    public static void writeToCsv(String path){
-        try (Scanner keyboard = new Scanner(System.in);
-             PrintWriter pw = new PrintWriter(new FileWriter(path, true))){
+    public static void writeToCsv(String path,Scanner keyboard){
+        try (PrintWriter pw = new PrintWriter(new FileWriter(path, true))){
 
             String toContinue;
 
