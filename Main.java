@@ -97,7 +97,6 @@ public class Main {
             for (sortCsv record : csvList) {
                 System.out.println(record);
             }
-
         }
     }
 }
