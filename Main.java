@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        String filePath = "CSV.txt";
+        String filePath = "Data.csv";
         Scanner keyboard = new Scanner(System.in);
         boolean exit = false;
         CalculationCsv calculation = new CalculationCsv();
